@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE SAM / Events</title>
+  <link rel="icon" type="image/jpg" href="../image/Ts logo.jpg" />
+  
+  <!-- CSS IMPORTS -->
+  <link rel="stylesheet" href="../Home/style.css" />
+  <link rel="stylesheet" href="event.css" />
+
+</head>
+<body>
+  <!-- SVG FILTER -->
+  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" aria-hidden="true">
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  
+                  0 1 0 0 0  
+                  0 0 1 0 0  
+                  0 0 0 20 -10" result="goo"/>
+        <feBlend in="SourceGraphic" in2="goo" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- DECORATIVE ELEMENTS -->
+ 
+  <div class="drops" aria-hidden="true"></div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <nav class="nav">
+      <div class="nav-container">
+        <a href="../Index.html" class="brand" style="text-decoration: none; color: inherit;">
+          <img src="../image/Ts logo.jpg" alt="THE SAM Logo" class="logo-img" />
+          <span>THE SAM</span>
+        </a>
+        
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-icon" aria-label="Open menu">&#9776;</label>
+
+        <div class="nav-links">
+          <!-- Navigation Links -->
+          <a href="../Index.html" class="nav-link" data-ripple>
+            <span class="label">Home</span>
+          </a>
+          <a href="#introduction" class="nav-link" data-ripple>
+            <span class="label">Intro</span>
+          </a>
+          <a href="#rules" class="nav-link" data-ripple>
+            <span class="label">Rules</span>
+          </a>
+          <a href="#ip" class="nav-link" data-ripple>
+            <span class="label">IP</span>
+          </a>
+          <a href="#cmd" class="nav-link" data-ripple>
+            <span class="label">Cmd</span>
+          </a>
+          <a href="../Store/store.html" class="nav-link" data-ripple>
+            <span class="label">Store</span>
+          </a>
+          <a href="#support" class="nav-link" data-ripple>
+            <span class="label">Support</span>
+          </a>
+
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO CONTENT SECTION -->
+  <main class="hero">
+    <div class="hero-wrap">
+      <section class="water-card event-hero-card">
+        <h1>𝐓𝐇𝐄 𝐒𝐀𝐌 𝐂𝐈𝐓𝐘</h1>
+        <h2>𝟑𝟎 𝐃ᴀʏꜱ 𝐏ᴜʙʟɪᴄ 𝐒ᴍᴘ 𝟐.𝟎</h2>
+        <h3>Peaceful Survival , Amazing Build , Epic Events and Pure Adventure Energy!</h3>
+      </section>
+    </div>
+  </main>
+
+  <!-- SMP INTRODUCTION SECTION -->
+  <div class="section-title" id="introduction">
+    <span class="drop"></span>
+    <h2>Introduction</h2>
+  </div>
+  <div class="smp">
+    <article class="card">
+      <h2>𝟑𝟎 𝐃ᴀʏꜱ 𝐌ɪɴᴇᴄʀᴀꜰᴛ 𝐒ᴍᴘ 𝟐.𝟎</h2>
+      <h3>24/7 Online Public SMP</h3>
+      <h5>You can play Minecraft using both 𝙋𝙧𝙚𝙢𝙞𝙪𝙢 and 𝘾𝙧𝙖𝙘𝙠𝙚𝙙 accounts.</h5>
+      <h4>All Available: Pocket, Bedrock, and Java Editions.</h4>
+      <h5>Welcome to City 2.0! This is a 30-day public SMP where players can enjoy.</h5>
+      <h5>Join our community and experience the best of Minecraft multiplayer!</h5>
+      
+      <div class="intro">
+        <ol class="list">
+          <li>
+            <div class="list-content">
+              <span class="list-number">1</span>
+              <div class="list-text">
+                <p>This is a public SMP where you can show your creativity, play with friends, and dive into an unforgettable Minecraft experiences</p> 
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">2</span>
+              <div class="list-text">
+                <p>𝙏𝙚𝙖𝙢𝙬𝙤𝙧𝙠 and 𝙁𝙧𝙞𝙚𝙣𝙙𝙨𝙝𝙞𝙥 are at the 𝙃𝙚𝙖𝙧𝙩 of this SMP, where every player's effort helps shape the world.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">3</span>
+              <div class="list-text">
+                <p>We'll explore this SMP on live streams, enjoy together, and keep growing side by side till the very end.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">4</span>
+              <div class="list-text">
+                <p>A world where every build, laugh, and moment with friends feels alive — this is where memories are made.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">5</span>
+              <div class="list-text">
+                <p>An exciting upcoming event packed with surprises and rewards — the more you watch the streams and interact in chat, the more TS Coins you'll earn to unlock amazing perks!</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">6</span>
+              <div class="list-text">
+                <p>Each player adds their own touch, turning this SMP into a world full of creativity and adventure.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">7</span>
+              <div class="list-text">
+                <p>TS is our own custom currency. You can earn it by watching our YouTube live streams and chatting, then use it in our webstore to buy special ranks, perks, and exclusive items.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">8</span>
+              <div class="list-text">
+                <p>Our store has all sorts of items for Minecraft, like ranks, perks, special items, potions, and enchanting books. Buy them to make your game even more fun!</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">9</span>
+              <div class="list-text">
+                <p>Last year, we had a lot of fun, and we're going to keep having fun just like that in this SMP too, while unlocking many achievements in 𝐓𝐇𝐄 𝐒𝐀𝐌 𝐂𝐈𝐓𝐘.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">10</span>
+              <div class="list-text">
+                <p>We'll have fun events, celebrations, and a last-day speech with our team, making the SMP special. In just 30 days, we'll create great experiences in 𝐓𝐇𝐄 𝐒𝐀𝐌 𝐂𝐈𝐓𝐘.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <h5>I hope you'll enjoy playing on this SMP in the future! Thanks for all your support — and I'm sure you'll keep showing the same love and support ahead too</h5>
+    </article>
+  </section>
+
+  <!-- SMP RULES SECTION -->
+  <div class="section-title" id="rules">
+    <span class="drop"></span>
+    <h2>Rules Book</h2>
+  </div>
+  <div class="smp">
+    <article class="card">
+      <h2>𝐌ɪɴᴇᴄʀᴀꜰᴛ 𝐒ᴍᴘ 𝐑ᴜʟᴇꜱ</h2>
+      <h3>Follow the instructions to keep games fair.</h3>
+      <h4>Read Now</h4>
+      
+      <div class="rule">
+        <ol class="list">
+          <li>
+            <div class="list-content">
+              <span class="list-number">1</span>
+              <div class="list-text">
+                <p>Respect Everyone and Treat all players with kindness. No bullying, no hate speech, or no toxic behaviors.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">2</span>
+              <div class="list-text">
+                <p>Don't spam in live streams — doing so will result in a punishment and a TS Coin subtracted</p>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">3</span>
+              <div class="list-text">
+                <p>Fair Play and No hacks, cheats, or unfair mods. Keep the gameplay fun and fair for everyone.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">4</span>
+              <div class="list-text">
+                <p>Keep the Chat Clean and Avoid spamming, arguing, or using bad language in chat.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">5</span>
+              <div class="list-text">
+                <p>No Griefing or Stealing and Don't destroy or take anything that isn't yours. Always ask before using someone's build or chest.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">6</span>
+              <div class="list-text">
+                <p>If you join an event, you must stay until it ends — leaving early can lead to disqualification or loss of rewards.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">7</span>
+              <div class="list-text">
+                <p>Follow event rules carefully. Cheating or exploiting will result in disqualification.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">8</span>
+              <div class="list-text">
+                <p>Don't interrupt or troll ongoing events.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">9</span>
+              <div class="list-text">
+                <p>No TS Coin fraud — always trade the correct amount or face strict punishment.</p>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="list-content">
+              <span class="list-number">10</span>
+              <div class="list-text">
+                <p>Be creative, have fun, and keep the world peaceful.</p>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <h5>Following all the above rules is mandatory — breaking them will result in strictly punishment and possible server bans.</h5>
+    </article>
+  </section>
+
+  <!-- IMPORTANT SECTION -->
+  <div class="section-title" id="cmd">
+    <span class="drop"></span>
+    <h2>Important</h2>
+  </div>
+  <section class="grid"> 
+    <article class="card">
+      <h4>Event Schedule</h4>
+      <div class="schedule-grid">
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Monday</span>
+            <span class="full-date">1 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>𝐖𝐞𝐥𝐜𝐨𝐦𝐞 𝐭𝐨 𝐓𝐇𝐄 𝐒𝐀𝐌 𝐂𝐈𝐓𝐘</p>
+              <p>Only the Overworld is open — the Nether, End, and PvP are currently disabled for fair gameplay.</p>
+            </div>
+          </div>
+        </div> 
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Sunday</span>
+            <span class="full-date">7 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Surprise Event</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Tuesday</span>
+            <span class="full-date">9 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Find the mansion, fight the Ravagers, and claim the Totem as your prize</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Thursday</span>
+            <span class="full-date">11 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Defend the village, defeat the Pillagers, and win the raid for glory!</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Saturday</span>
+            <span class="full-date">13 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Open Nether</p>
+              <p>Explore the Nether, find the fortress, and conquer its fiery challenges!</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Sunday</span>
+            <span class="full-date">14 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Surprise Event</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Tuesday</span>
+            <span class="full-date">16 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Defeat the Wither in an epic battle and use its star to build a powerful beacon!</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Thursday</span>
+            <span class="full-date">18 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Explore deep caves and ancient structures to find rare armor trims and craft your own unique style!</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Saturday</span>
+            <span class="full-date">20 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Explore the Ancient City, fight the Warden</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Sunday</span>
+            <span class="full-date">21 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Surprise Event</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Tuesday</span>
+            <span class="full-date">23 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Get ready and decorate for the Christmas Celebration.</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Thursday</span>
+            <span class="full-date">25 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Happy Christmas </p>
+              <p>Celebrate Christmas together with fun and rewards</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Saturday</span>
+            <span class="full-date">27 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Find the End Portal and get prepare for the final battle.</p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Sunday</span>
+            <span class="full-date">28 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Enter the End, fight the Ender Dragon, and bring the SMP to its epic finale.</p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        <div class="schedule-row">
+          <div class="day-column">
+            <span class="day-name">Tuesday</span>
+            <span class="full-date">30 December 2025</span>
+          </div>
+          <div class="events-column">
+            <div class="event-topic">
+              <p>Stage Speech Day — a time to share memories and celebrate the end of 𝐓𝐇𝐄 𝐒𝐀𝐌 𝐂𝐈𝐓𝐘 SMP.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    
+    <!-- Commands -->
+    <article class="card">
+      <h4>Commands</h4>
+      <div class="commands-list">
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">spawn</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Teleport to spawn</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">home</span>
+            <span class="command-syntax">soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Teleport to your home</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">sethome</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Set your home location</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">tpa</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Request teleport to player</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">warp</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Teleport to warp location</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">msg</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Private message player</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">rules</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>View server rules</p>
+            </div>
+          </div>
+        </div>
+        <div class="command-item">
+          <div class="command-column">
+            <span class="command-name">shop</span>
+            <span class="command-syntax">/soon</span>
+          </div>
+          <div class="description-column">
+            <div class="command-description">
+              <p>Access the server shop</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- DASHBOARD SECTION -->
+  <div class="section-title" id="ip">
+    <span class="drop"></span>
+    <h2>Dashboard</h2>
+  </div>
+  <section class="grid"> 
+    <article class="card announcements-card">
+      <h4>Announcements</h4>
+      <div class="announcements-container">
+        <div class="announcements-wrapper" id="announcements-wrapper">
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div class="announcement-badge-wrapper">
+                <span class="announcement-badge badge-new">New</span>
+              </div>
+              <span class="announcement-date">December 1, 2025</span>
+            </div>
+            <h5 class="announcement-title">Welcome to THE SAM CITY SMP 2.0!</h5>
+            <p class="announcement-content">Welcome to City 2.0! This is a 30-day public SMP where players can enjoy.
+              Join our community and experience the best of Minecraft multiplayer!</p>
+          </div>
+          <div class="announcement-item">
+            <div class="announcement-header">
+              <div class="announcement-badge-wrapper">
+                <span class="announcement-badge badge-event">Shop</span>
+              </div>
+              <span class="announcement-date">December 1, 2025</span>
+            </div>
+            <h5 class="announcement-title">Shop Coming Soon</h5>
+            <p class="announcement-content">Get ready for an epic shop! Stay tuned for more details. Make sure you're online and ready to participate for amazing rewards and TS Coins!</p>
+          </div>
+      </div>
+    </article>
+    <article class="card">
+      <h4>Server IP</h4>
+      <div class="ip-sections">
+        <!-- Java Edition -->
+        <div class="ip-section">
+          <div class="ip-section-header">
+            <div class="edition-badge-wrapper">
+              <span class="edition-badge java">Java Edition</span>
+            </div>
+          </div>
+          <div class="ip-field-group">
+            <label class="ip-label">
+              <span class="ip-label-icon">🌐</span>
+              Server Address
+            </label>
+            <div class="ip-input-wrapper">
+              <input type="text" class="ip-input" value="mc.thesam.in:26213" readonly id="java-ip">
+              <button class="copy-btn" onclick="copyToClipboard('java-ip')" title="Copy IP">
+                <span class="copy-icon">📋</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bedrock & Pocket Edition -->
+        <div class="ip-section">
+          <div class="ip-section-header">
+            <div class="edition-badge-wrapper">
+              <span class="edition-badge bedrock">Bedrock & Pocket Edition</span>
+            </div>
+          </div>
+          <div class="ip-fields-row">
+            <div class="ip-field-group">
+              <label class="ip-label">
+                <span class="ip-label-icon">🌐</span>
+                Server IP
+              </label>
+              <div class="ip-input-wrapper">
+                <input type="text" class="ip-input" value="mc.thesam.in" readonly id="bedrock-ip">
+                <button class="copy-btn" onclick="copyToClipboard('bedrock-ip')" title="Copy IP">
+                  <span class="copy-icon">📋</span>
+                </button>
+              </div>
+            </div>
+            <div class="ip-field-group">
+              <label class="ip-label">
+                <span class="ip-label-icon">🔌</span>
+                Port
+              </label>
+              <div class="ip-input-wrapper">
+                <input type="text" class="ip-input" value="26213" readonly id="bedrock-port">
+                <button class="copy-btn" onclick="copyToClipboard('bedrock-port')" title="Copy Port">
+                  <span class="copy-icon">📋</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- SUPPORT SECTION -->
+  <div class="section-title" id="support">
+   <span class="drop"></span>
+   <h2>User</h2>
+  </div>
+  <section class="grid">
+    <article class="card">
+      <h4>Whitelist</h4>
+      <p class="whitelist-description">Apply to join THE SAM CITY SMP 2.0. Fill out the form below to request whitelist access.</p>
+
+      <div class="requirements-section">
+        <h5>Requirements</h5>
+        <ul class="requirements-list">
+          <li>1000 TS Coins</li>
+        </ul>
+      </div>
+
+      <form id="whitelist-form" class="whitelist-form">
+        <div class="form-group">
+          <label for="minecraft-edition" class="form-label">
+            Minecraft Edition
+            <span class="required">*</span>
+          </label>
+          <select id="minecraft-edition" name="minecraft-edition" class="form-input" required>
+            <option value="">Select Edition</option>
+            <option value="java">Java Edition</option>
+            <option value="bedrock">Bedrock Edition</option>
+            <option value="pocket">Pocket Edition</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="minecraft-username" class="form-label">
+            Minecraft Username
+            <span class="required">*</span> 
+          </label>
+          <input 
+            type="text" 
+            id="minecraft-username" 
+            name="minecraft-username" 
+            class="form-input" 
+            placeholder="Enter your Minecraft username"
+            required
+            pattern="[a-zA-Z0-9_]{3,16}"
+            title="Minecraft username must be 3-16 characters (letters, numbers, and underscores only)"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="discord-username" class="form-label">
+            Discord Username 
+            <span class="optional">(Optional)</span>
+          </label>
+          <input 
+            type="text" 
+            id="discord-username" 
+            name="discord-username" 
+            class="form-input" 
+            placeholder="Enter your Discord username (e.g., username#1234)"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="image-upload" class="form-label">
+            Upload Image
+            <span class="required">*</span>
+          </label>
+          <div class="file-upload-wrapper">
+            <input 
+              type="file" 
+              id="image-upload" 
+              name="image-upload" 
+              class="file-input" 
+              accept="image/*"
+              required
+            >
+            <label for="image-upload" class="file-upload-button">
+              <span class="file-upload-button-text">Choose File</span>
+            </label>
+            <span class="file-name-display" id="file-name-display">No file chosen</span>
+            <div class="file-preview-inline" id="image-preview"></div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <input type="submit" value="Whitlist Now" class="submit-btn">
+        </div>
+        
+        <div class="form-message" id="whitelist-message"></div>
+      </form>
+    </article>
+    <article class="card">
+      <h4>Forgot Password</h4>
+      <p class="whitelist-description">Request a password reset for your account. Fill out the form below to recover your password.</p>
+      
+      <div class="requirements-section">
+        <h5>Requirements</h5>
+        <ul class="requirements-list">
+          <li>Minecraft Edition must be selected</li>
+          <li>Minecraft Username is required (3-16 characters)</li>
+          <li>Discord Username is optional but recommended</li>
+          <li>1000 TS Coins</li>
+        </ul>
+      </div>
+      
+      <form id="forgot-password-form" class="whitelist-form">
+        <div class="form-group">
+          <label for="fp-minecraft-edition" class="form-label">
+            Minecraft Edition
+            <span class="required">*</span>
+          </label>
+          <select id="fp-minecraft-edition" name="fp-minecraft-edition" class="form-input" required>
+            <option value="">Select Edition</option>
+            <option value="java">Java Edition</option>
+            <option value="bedrock">Bedrock Edition</option>
+            <option value="pocket">Pocket Edition</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="fp-minecraft-username" class="form-label">
+            Minecraft Username
+            <span class="required">*</span> 
+          </label>
+          <input 
+            type="text" 
+            id="fp-minecraft-username" 
+            name="fp-minecraft-username" 
+            class="form-input" 
+            placeholder="Enter your Minecraft username"
+            required
+            pattern="[a-zA-Z0-9_]{3,16}"
+            title="Minecraft username must be 3-16 characters (letters, numbers, and underscores only)"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="fp-discord-username" class="form-label">
+            Discord Username 
+            <span class="optional">(Optional)</span>
+          </label>
+          <input 
+            type="text" 
+            id="fp-discord-username" 
+            name="fp-discord-username" 
+            class="form-input" 
+            placeholder="Enter your Discord username (e.g., username#1234)"
+          >
+        </div>
+        
+        <div class="form-actions">
+          <input type="submit" value="Submit Request" class="submit-btn">
+        </div>
+        
+        <div class="form-message" id="forgot-password-message"></div>
+      </form>
+    </article>
+    <article class="card">
+      <h4>Bug Report</h4>
+      <p class="whitelist-description">Found a bug or issue? Report it to us so we can fix it. Please provide as much detail as possible.</p>
+      
+      <form id="bug-report-form" class="whitelist-form">
+        <div class="form-group">
+          <label for="bug-discord-username" class="form-label">
+            Discord Username 
+            <span class="optional">(Optional)</span>
+          </label>
+          <input 
+            type="text" 
+            id="bug-discord-username" 
+            name="bug-discord-username" 
+            class="form-input" 
+            placeholder="Enter your Discord username (e.g., username#1234)"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="bug-title" class="form-label">
+            Title
+            <span class="required">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="bug-title" 
+            name="bug-title" 
+            class="form-input" 
+            placeholder="Enter a brief title for the bug (e.g., 'Login button not working')"
+            required
+            maxlength="100"
+          >
+        </div>
+        
+        <div class="form-group">
+          <label for="bug-description" class="form-label">
+            Description
+            <span class="required">*</span>
+          </label>
+          <textarea 
+            id="bug-description" 
+            name="bug-description" 
+            class="form-input form-textarea" 
+            placeholder="Please provide a detailed description of the bug, including steps to reproduce, expected behavior, and actual behavior..."
+            required
+            rows="6"
+          ></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label for="bug-image-upload" class="form-label">
+            Upload Image
+            <span class="optional">(Optional)</span>
+          </label>
+          <div class="file-upload-wrapper">
+            <input 
+              type="file" 
+              id="bug-image-upload" 
+              name="bug-image-upload" 
+              class="file-input" 
+              accept="image/*"
+            >
+            <label for="bug-image-upload" class="file-upload-button">
+              <span class="file-upload-button-text">Choose File</span>
+            </label>
+            <span class="file-name-display" id="bug-file-name-display">No file chosen</span>
+            <div class="file-preview-inline" id="bug-image-preview"></div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <input type="submit" value="Submit Report" class="submit-btn">
+        </div>
+        
+        <div class="form-message" id="bug-report-message"></div>
+      </form>
+    </article>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>© <span id="year"></span> THE SAM. All rights reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT IMPORTS -->
+  <script src="../Home/script.js"></script>
+  <script src="Event.js"></script>
+
+</body>
+</html>
