@@ -335,6 +335,18 @@ window.addEventListener('offline', () => {
   showNotification('You are currently offline', 'error');
 });
 
+// ---------------------- LOYALTY POINTS REFRESH ----------------------
+function refreshLoyaltyPoints() {
+  // This function can be used to refresh loyalty points from server
+  // For now, it just updates the display if wallet functions are available
+  if (window.updateWalletDisplay) {
+    updateWalletDisplay();
+    showNotification('Loyalty points refreshed!', 'success');
+  } else {
+    showNotification('Wallet system not available', 'info');
+  }
+}
+
 // ---------------------- EXPORT FUNCTIONS FOR GLOBAL USE ----------------------
 window.showNotification = showNotification;
 window.refreshLoyaltyPoints = refreshLoyaltyPoints;
