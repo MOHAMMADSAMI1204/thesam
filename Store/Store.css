@@ -1,25 +1,74 @@
+/* Center Hero Section */
+.hero-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.water-card.event-hero-card {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Grid Layout for Rank Cards - Display in Rows */
+section.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 /* Ensure Items Match Rank Appearance Exactly */
 .rank-card {
   position: relative;
   border-radius: 24px;
   padding: 0;
-  background: linear-gradient(135deg, rgba(15, 27, 51, 0.9), rgba(11, 18, 32, 0.95));
-  border: 1px solid rgba(255,255,255,0.15);
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.95), rgba(11, 18, 32, 0.98));
+  border: 2px solid rgba(255,255,255,0.1);
   backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(118, 199, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   max-width: 380px;
   width: 100%;
-  min-height: auto;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.rank-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.05), rgba(74, 167, 239, 0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .rank-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(118, 199, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(118, 199, 255, 0.4);
+}
+
+.rank-card:hover::before {
+  opacity: 1;
 }
 
 .rank-glow {
@@ -27,23 +76,49 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, #76c7ff, transparent);
+  height: 5px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(118, 199, 255, 0.6), 
+    rgba(74, 167, 239, 0.8),
+    rgba(118, 199, 255, 0.6), 
+    transparent);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
 }
 
 .rank-card:hover .rank-glow {
-  opacity: 0.8;
+  opacity: 1;
+  animation: glow-pulse 1.5s ease-in-out infinite;
 }
 
 .rank-content {
   display: flex;
   flex-direction: column;
-  height: auto;
+  flex: 1;
   padding: 30px 25px;
-  gap: 20px;
+  gap: 0;
   position: relative;
+  z-index: 1;
+  transition: transform 0.5s ease;
+  align-items: stretch;
+  justify-content: space-between;
+  min-height: 0;
+}
+
+.rank-card:hover .rank-content {
+  transform: translateY(-2px);
 }
 
 /* Rank Badge - Dual Tier Layout */
@@ -53,6 +128,7 @@
   justify-content: space-between;
   margin-bottom: 10px;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .rank-tier {
@@ -68,24 +144,59 @@
   white-space: nowrap;
   text-align: center;
   flex-shrink: 0;
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.rank-tier::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.rank-card:hover .rank-tier::before {
+  left: 100%;
 }
 
 /* T S Wallet specific styling */
 .rank-tier:first-child {
-  background: linear-gradient(135deg, rgba(118, 199, 255, 0.2), rgba(74, 167, 239, 0.1));
-  border-color: rgba(118, 199, 255, 0.4);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.25), rgba(74, 167, 239, 0.15));
+  border-color: rgba(118, 199, 255, 0.5);
   color: #76c7ff;
+  box-shadow: 0 2px 10px rgba(118, 199, 255, 0.3);
+}
+
+.rank-card:hover .rank-tier:first-child {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.35), rgba(74, 167, 239, 0.25));
+  border-color: rgba(118, 199, 255, 0.7);
+  box-shadow: 0 4px 15px rgba(118, 199, 255, 0.5);
+  transform: translateY(-2px);
 }
 
 .rank-tier:last-child {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
-  border-color: rgba(255, 255, 255, 0.25);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.rank-card:hover .rank-tier:last-child {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Rank Header */
 .rank-header {
   text-align: center;
   margin-bottom: 10px;
+  flex-shrink: 0;
 }
 
 .rank-name {
@@ -99,6 +210,16 @@
   text-shadow: 0 4px 20px rgba(118, 199, 255, 0.3);
   line-height: 1.1;
   margin-bottom: 20px;
+  transition: all 0.5s ease;
+  position: relative;
+}
+
+.rank-card:hover .rank-name {
+  background: linear-gradient(135deg, #ffffff, #8cd6ff, #4aa7ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 15px rgba(118, 199, 255, 0.5));
 }
 
 /* Rank Description */
@@ -106,6 +227,24 @@
   margin: 12px 0 0 0;
   padding: 0;
   text-align: center;
+  column-count: 2;
+  column-gap: 15px;
+  flex: 1;
+  min-height: 0;
+}
+
+.rank-description h3,
+.rank-description p {
+  column-span: all;
+}
+
+.rank-description h3 {
+  text-align: center;
+  margin: 20px 0 15px 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  width: 100%;
 }
 
 .rank-description p {
@@ -125,12 +264,24 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin: 10px 0;
-  padding: 7px;
-  background: rgba(255,255,255,0.05);
+  margin-top: 20px;
+  margin-bottom: 15px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
   border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
   position: relative;
+  transition: all 0.4s ease;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
+.rank-card:hover .rank-pricing {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.15), rgba(74, 167, 239, 0.08));
+  border-color: rgba(118, 199, 255, 0.3);
+  box-shadow: 
+    inset 0 2px 4px rgba(0,0,0,0.1),
+    0 0 15px rgba(118, 199, 255, 0.2);
 }
 
 .price-original {
@@ -153,23 +304,114 @@
   left: 15px;
   background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
   color: white;
-  padding: 3px 7px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.5), 0 0 10px rgba(255, 107, 107, 0.3);
+  animation: discount-pulse 2s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+@keyframes discount-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.rank-card:hover .discount-tag {
+  box-shadow: 0 6px 18px rgba(255, 107, 107, 0.6), 0 0 15px rgba(255, 107, 107, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Rank Actions */
 .rank-actions {
-  margin-top: auto;
+  margin-top: 0;
   position: relative;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rank-actions-row {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.perks-btn,
+.requirements-btn {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 2px solid rgba(118, 199, 255, 0.4);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.15), rgba(74, 167, 239, 0.1));
+  color: #76c7ff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.perks-btn:hover,
+.requirements-btn:hover {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.25), rgba(74, 167, 239, 0.2));
+  border-color: rgba(118, 199, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 255, 0.3);
+  color: #8cd6ff;
+}
+
+.perks-btn:active,
+.requirements-btn:active {
+  transform: translateY(0);
+}
+
+.requirements-btn {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 2px solid rgba(118, 199, 255, 0.4);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.15), rgba(74, 167, 239, 0.1));
+  color: #76c7ff;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.requirements-btn:hover {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.25), rgba(74, 167, 239, 0.2));
+  border-color: rgba(118, 199, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 255, 0.3);
+  color: #8cd6ff;
+}
+
+.requirements-btn:active {
+  transform: translateY(0);
 }
 
 .rank-buy-btn {
-  width: 100%;
+  flex: 1;
   justify-content: center;
   font-weight: 700;
   padding: 16px 24px;
@@ -187,12 +429,35 @@
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #76c7ff, #4aa7ef);
+  box-shadow: 0 4px 15px rgba(118, 199, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rank-buy-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
 }
 
 .rank-buy-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(118, 199, 255, 0.5), 0 0 20px rgba(118, 199, 255, 0.3);
   background: linear-gradient(135deg, #8cd6ff, #5ab5ff);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.rank-buy-btn:hover::before {
+  left: 100%;
+}
+
+.rank-buy-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 255, 0.4);
 }
 
 .btn-text {
@@ -268,4 +533,356 @@
     font-size: 11px;
     padding: 6px 12px;
   }
+}
+
+/* Modern Badge Design */
+.rank-description .badge {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.8), rgba(11, 18, 32, 0.9));
+  border: 2px solid rgba(118, 199, 255, 0.3);
+  color: #76c7ff;
+  margin: 5px 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  break-inside: avoid;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rank-description .badge::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(118, 199, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.rank-description .badge:hover {
+  transform: translateY(-4px) scale(1.05);
+  border-color: rgba(118, 199, 255, 0.6);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.2), rgba(74, 167, 239, 0.15));
+  box-shadow: 0 8px 25px rgba(118, 199, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  color: #8cd6ff;
+}
+
+.rank-description .badge:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.rank-description .badge:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Rank Purchase Form Styles */
+.rank-purchase-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rank-purchase-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rank-purchase-form label {
+  color: #76c7ff;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rank-purchase-form input[type="text"],
+.rank-purchase-form input[type="file"] {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(118, 199, 255, 0.3);
+  background: rgba(118, 199, 255, 0.08);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rank-purchase-form input[type="text"]:focus {
+  outline: none;
+  border-color: rgba(118, 199, 255, 0.6);
+  background: rgba(118, 199, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(118, 199, 255, 0.2);
+}
+
+.rank-purchase-form input[type="file"] {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rank-purchase-form input[type="file"]::file-selector-button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(118, 199, 255, 0.4);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.2), rgba(74, 167, 239, 0.15));
+  color: #76c7ff;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.rank-purchase-form input[type="file"]::file-selector-button:hover {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.3), rgba(74, 167, 239, 0.25));
+  border-color: rgba(118, 199, 255, 0.6);
+}
+
+.rank-purchase-form small {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+  line-height: 1.4;
+}
+
+.rank-purchase-form .submit-btn {
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #76c7ff, #4aa7ef);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(118, 199, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rank-purchase-form .submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 255, 0.5);
+  background: linear-gradient(135deg, #8cd6ff, #5ab5ff);
+}
+
+.rank-purchase-form .submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Rank Form Styles */
+.Rank-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.Rank-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Rank-form .form-label {
+  color: #76c7ff;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.Rank-form .form-label .required {
+  color: #ff6b6b;
+  font-weight: 700;
+}
+
+.Rank-form .form-label .optional {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: none;
+  font-style: italic;
+}
+
+.Rank-form .form-input {
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(118, 199, 255, 0.3);
+  background: rgba(118, 199, 255, 0.08);
+  color: var(--text);
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Rank-form .form-input:focus {
+  outline: none;
+  border-color: rgba(118, 199, 255, 0.6);
+  background: rgba(118, 199, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(118, 199, 255, 0.2);
+}
+
+.Rank-form .form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.Rank-form select.form-input {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2376c7ff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.Rank-form select.form-input option {
+  background: rgba(15, 27, 51, 0.95);
+  color: var(--text);
+}
+
+/* File Upload Styles */
+.file-upload-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.file-upload-button {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: 2px solid rgba(118, 199, 255, 0.4);
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.15), rgba(74, 167, 239, 0.1));
+  color: #76c7ff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: fit-content;
+}
+
+.file-upload-button:hover {
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.25), rgba(74, 167, 239, 0.2));
+  border-color: rgba(118, 199, 255, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(118, 199, 255, 0.3);
+}
+
+.file-upload-button-text {
+  pointer-events: none;
+}
+
+.file-name-display {
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.file-preview-inline {
+  margin-top: 10px;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.file-preview-inline .preview-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(118, 199, 255, 0.3);
+  display: block;
+}
+
+.form-actions {
+  margin-top: 10px;
+}
+
+.Rank-form .submit-btn {
+  width: 100%;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: none;
+  background: linear-gradient(135deg, #76c7ff, #4aa7ef);
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(118, 199, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.Rank-form .submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 199, 255, 0.5);
+  background: linear-gradient(135deg, #8cd6ff, #5ab5ff);
+}
+
+.Rank-form .submit-btn:active {
+  transform: translateY(0);
+}
+
+.form-message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+  min-height: 20px;
+  transition: all 0.3s ease;
+}
+
+.form-message.error {
+  background: rgba(255, 107, 107, 0.15);
+  border: 1px solid rgba(255, 107, 107, 0.4);
+  color: #ff6b6b;
+}
+
+.form-message.success {
+  background: rgba(76, 175, 80, 0.15);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #4CAF50;
 }

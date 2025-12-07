@@ -158,69 +158,417 @@ class ImageScrollAds {
 // Rank Purchase Handler
 class RankPurchaseHandler {
   constructor() {
-    this.buyButtons = document.querySelectorAll('.rank-buy-btn');
     this.init();
   }
   
   init() {
-    this.buyButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
+    // Use event delegation to handle clicks on rank buttons and pack buttons
+    document.addEventListener('click', (e) => {
+      const button = e.target.closest('.rank-buy-btn, .Pack-buy-btn');
+      if (button && button.hasAttribute('data-product') && button.hasAttribute('data-price')) {
         e.preventDefault();
+        e.stopPropagation();
+        console.log('Purchase button clicked:', button.getAttribute('data-product'));
         this.handlePurchase(button);
-      });
+      }
     });
+    
+    // Also log how many buttons we found
+    const rankButtons = document.querySelectorAll('.rank-buy-btn[data-product][data-price]');
+    const packButtons = document.querySelectorAll('.Pack-buy-btn[data-product][data-price]');
+    console.log(`RankPurchaseHandler initialized - found ${rankButtons.length} rank buttons and ${packButtons.length} pack buttons`);
   }
   
   handlePurchase(button) {
     const product = button.getAttribute('data-product');
     const price = button.getAttribute('data-price');
-    const customTagInput = document.querySelector('.custom-tag-input');
-    const customTag = customTagInput ? customTagInput.value : null;
     
     if (!product || !price) {
       console.error('Missing product or price data');
       return;
     }
     
-    // Check if user is logged in
-    const user = JSON.parse(localStorage.getItem('user') || 'null');
-    if (!user) {
-      showNotification('Please sign in to make a purchase', 'error');
-      return;
-    }
-    
-    // Check user's coin balance
-    const userCoins = user.coins || 0;
     const priceNumber = parseInt(price);
     
-    if (userCoins < priceNumber) {
-      showNotification(`Insufficient TS Coins. You need ${priceNumber - userCoins} more coins.`, 'error');
+    console.log('Opening popup for:', product, priceNumber);
+    
+    // Show purchase form popup
+    this.showPurchaseForm(button, product, priceNumber);
+  }
+  
+  showPurchaseForm(button, product, price) {
+    console.log('showPurchaseForm called for:', product);
+    
+    // Remove any existing popups first
+    const existingOverlays = document.querySelectorAll('.popup-overlay');
+    existingOverlays.forEach(overlay => overlay.remove());
+    
+    // Create popup overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    overlay.style.zIndex = '10000'; // Ensure it's on top
+    overlay.style.display = 'flex'; // Ensure it's displayed
+    
+    // Create popup content
+    const popup = document.createElement('div');
+    popup.className = 'popup-content';
+    
+    popup.innerHTML = `
+      <div class="popup-header">
+        <h3>Purchase ${product}</h3>
+        <button class="popup-close">&times;</button>
+      </div>
+      <div class="popup-body">
+        <form id="Rank-form" class="Rank-form">
+          <div class="form-group">
+            <label for="minecraft-edition" class="form-label">
+              Minecraft Edition
+              <span class="required">*</span>
+            </label>
+            <select id="minecraft-edition" name="minecraft-edition" class="form-input" required>
+              <option value="">Select Edition</option>
+              <option value="java">Java Edition</option>
+              <option value="bedrock">Bedrock Edition</option>
+              <option value="pocket">Pocket Edition</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="minecraft-username" class="form-label">
+              Minecraft Username
+              <span class="required">*</span> 
+            </label>
+            <input 
+              type="text" 
+              id="minecraft-username" 
+              name="minecraft-username" 
+              class="form-input" 
+              placeholder="Enter your Minecraft username"
+              required
+              pattern="[a-zA-Z0-9_]{3,16}"
+              title="Minecraft username must be 3-16 characters (letters, numbers, and underscores only)"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="discord-username" class="form-label">
+              Discord Username 
+              <span class="optional">(Optional)</span>
+            </label>
+            <input 
+              type="text" 
+              id="discord-username" 
+              name="discord-username" 
+              class="form-input" 
+              placeholder="Enter your Discord username (e.g., username#1234)"
+            >
+          </div>
+          
+          <div class="form-group">
+            <label for="image-upload" class="form-label">
+              Upload Image
+              <span class="required">*</span>
+            </label>
+            <div class="file-upload-wrapper">
+              <input 
+                type="file" 
+                id="image-upload" 
+                name="image-upload" 
+                class="file-input" 
+                accept="image/*"
+                required
+              >
+              <label for="image-upload" class="file-upload-button">
+                <span class="file-upload-button-text">Choose File</span>
+              </label>
+              <span class="file-name-display" id="file-name-display">No file chosen</span>
+              <div class="file-preview-inline" id="image-preview"></div>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <input type="submit" value="Rank Now" class="submit-btn">
+          </div>
+          
+          <div class="form-message" id="Rank-message"></div>
+        </form>
+      </div>
+    `;
+    
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    console.log('Rank form popup overlay added to body');
+    
+    // Force display and ensure visibility
+    requestAnimationFrame(() => {
+      overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      popup.style.transform = 'scale(1)';
+    });
+    
+    // Close handlers
+    const closeBtn = popup.querySelector('.popup-close');
+    closeBtn.addEventListener('click', () => {
+      document.body.removeChild(overlay);
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        document.body.removeChild(overlay);
+      }
+    });
+    
+    // File upload preview handler
+    const fileInput = popup.querySelector('#image-upload');
+    const fileNameDisplay = popup.querySelector('#file-name-display');
+    const imagePreview = popup.querySelector('#image-preview');
+    
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        fileNameDisplay.textContent = file.name;
+        
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="preview-image">`;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        fileNameDisplay.textContent = 'No file chosen';
+        imagePreview.innerHTML = '';
+      }
+    });
+    
+    // Form submission handler
+    const form = popup.querySelector('#Rank-form');
+    // Store button class to determine webhook
+    const isPackButton = button.classList.contains('Pack-buy-btn');
+    // Get TS Coins value if available
+    const tsCoins = button.getAttribute('data-ts-coins');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handleFormSubmit(form, product, price, overlay, isPackButton, tsCoins);
+    });
+  }
+  
+  async handleFormSubmit(form, product, price, overlay, isPackButton = false, tsCoins = null) {
+    const formData = new FormData(form);
+    const minecraftEdition = formData.get('minecraft-edition');
+    const minecraftUsername = formData.get('minecraft-username');
+    const discordUsername = formData.get('discord-username');
+    const imageFile = formData.get('image-upload');
+    
+    // Validate required fields
+    if (!minecraftEdition || minecraftEdition.trim() === '') {
+      this.showFormMessage('Please select a Minecraft Edition', 'error');
       return;
     }
     
-    // Process purchase
-    this.processPurchase(user, product, priceNumber);
+    if (!minecraftUsername || minecraftUsername.trim() === '') {
+      this.showFormMessage('Please enter your Minecraft username', 'error');
+      return;
+    }
+    
+    if (!imageFile || imageFile.size === 0) {
+      this.showFormMessage('Please upload an image', 'error');
+      return;
+    }
+    
+    // Show loading state
+    this.showFormMessage('Submitting request...', 'success');
+    const submitBtn = form.querySelector('.submit-btn');
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.value = 'Submitting...';
+    }
+    
+    try {
+      // Determine webhook URL based on button type
+      const webhookUrl = isPackButton 
+        ? 'https://discord.com/api/webhooks/1444948439472406562/spjCoHZ82hh-P1DLXAZNqaleLMtP9E8rXC6KsEeI7C2i_OYnz6JNDDv4u_EHLLATHTWU'
+        : 'https://discord.com/api/webhooks/1444910524025278484/0QwlSBMIL606PmC42c-uRGWhfskWy95dBxxevVLaa-013PQhFbtzDha4YEamptvsrZsS';
+      
+      // Send to Discord webhook
+      await this.sendToDiscordWebhook(product, price, {
+        minecraftEdition: minecraftEdition,
+        minecraftUsername: minecraftUsername,
+        discordUsername: discordUsername,
+        imageFile: imageFile
+      }, null, webhookUrl, tsCoins);
+      
+      // Process purchase
+      const user = JSON.parse(localStorage.getItem('user') || 'null');
+      this.processPurchase(user, product, price, {
+        minecraftEdition: minecraftEdition,
+        minecraftUsername: minecraftUsername,
+        discordUsername: discordUsername,
+        imageFile: imageFile
+      });
+      
+      // Close popup
+      document.body.removeChild(overlay);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      this.showFormMessage('Failed to submit. Please try again.', 'error');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.value = 'Rank Now';
+      }
+    }
   }
   
-  processPurchase(user, product, price) {
-    // Update user's coin balance
-    user.coins = (user.coins || 0) - price;
-    localStorage.setItem('user', JSON.stringify(user));
+  async sendToDiscordWebhook(product, price, formData, user = null, webhookUrl = null, tsCoins = null) {
+    // Use provided webhook URL or default to rank webhook
+    if (!webhookUrl) {
+      webhookUrl = 'https://discord.com/api/webhooks/1444910524025278484/0QwlSBMIL606PmC42c-uRGWhfskWy95dBxxevVLaa-013PQhFbtzDha4YEamptvsrZsS';
+    }
     
-    // Update wallet display
-    if (window.updateWalletDisplay) {
-      updateWalletDisplay();
+    // Format edition name
+    const editionNames = {
+      'java': 'Java Edition',
+      'bedrock': 'Bedrock Edition',
+      'pocket': 'Pocket Edition'
+    };
+    const editionDisplay = editionNames[formData.minecraftEdition] || formData.minecraftEdition;
+    
+    // Format submission date/time
+    const now = new Date();
+    const submittedAt = now.toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      timeZoneName: 'short'
+    });
+    
+    // Create Discord embed
+    const embed = {
+      title: '🎮 New Rank Purchase Request',
+      color: 0x76c7ff, // Blue color matching the theme
+      fields: [
+        {
+          name: '📦 Product',
+          value: product,
+          inline: false
+        },
+        {
+          name: '💰 Price',
+          value: `${price.toLocaleString()} TS Coins`,
+          inline: false
+        }
+      ],
+      timestamp: new Date().toISOString(),
+      footer: {
+        text: 'THE SAM City Store'
+      }
+    };
+    
+    // Add TS Coins field if available (for packs)
+    if (tsCoins) {
+      const tsCoinsFormatted = parseInt(tsCoins).toLocaleString('en-IN');
+      embed.fields.push({
+        name: '🪙 TS Coins Included',
+        value: `${tsCoinsFormatted} TS Coins`,
+        inline: false
+      });
+    }
+    
+    // Add other fields
+    embed.fields.push(
+      {
+        name: '🎮 Minecraft Edition',
+        value: editionDisplay,
+        inline: false
+      },
+      {
+        name: '👤 Minecraft Username',
+        value: formData.minecraftUsername,
+        inline: false
+      },
+      {
+        name: '💬 Discord Username',
+        value: formData.discordUsername || 'Not provided',
+        inline: false
+      },
+      {
+        name: '🕐 Submitted At',
+        value: submittedAt,
+        inline: false
+      }
+    );
+    
+    // Add image to embed if file is available
+    if (formData.imageFile && formData.imageFile.size > 0) {
+      // Reference the uploaded file in the embed
+      embed.image = {
+        url: `attachment://${formData.imageFile.name}`
+      };
+    }
+    
+    // Prepare payload with file
+    const payload = new FormData();
+    payload.append('payload_json', JSON.stringify({
+      embeds: [embed]
+    }));
+    
+    // Add image file if available
+    if (formData.imageFile && formData.imageFile.size > 0) {
+      payload.append('file', formData.imageFile, formData.imageFile.name);
+    }
+    
+    // Send to Discord webhook
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      body: payload
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Discord webhook error: ${response.status}`);
+    }
+    
+    return response;
+  }
+  
+  showFormMessage(message, type) {
+    const messageEl = document.getElementById('Rank-message');
+    if (messageEl) {
+      messageEl.textContent = message;
+      messageEl.className = `form-message ${type}`;
+      setTimeout(() => {
+        messageEl.textContent = '';
+        messageEl.className = 'form-message';
+      }, 5000);
+    }
+  }
+  
+  processPurchase(user, product, price, formData = {}) {
+    // Update user's coin balance only if user is logged in
+    if (user) {
+      user.coins = (user.coins || 0) - price;
+      localStorage.setItem('user', JSON.stringify(user));
+      
+      // Update wallet display
+      if (window.updateWalletDisplay) {
+        updateWalletDisplay();
+      }
     }
     
     // Show success message
-    showNotification(`Successfully purchased ${product}!`, 'success');
+    showNotification(`Purchase request submitted for ${product}!`, 'success');
     
     // Here you would typically send this data to your backend
     console.log('Purchase processed:', {
-      user: user.email,
+      user: user ? user.email : 'Not logged in',
       product: product,
       price: price,
-      remainingCoins: user.coins
+      remainingCoins: user ? user.coins : 'N/A',
+      minecraftEdition: formData.minecraftEdition,
+      minecraftUsername: formData.minecraftUsername,
+      discordUsername: formData.discordUsername,
+      imageFile: formData.imageFile
     });
   }
 }
@@ -234,10 +582,9 @@ document.addEventListener('DOMContentLoaded', function() {
     new ImageScrollAds();
   }
   
-  // Initialize rank purchase handler
-  if (document.querySelector('.rank-buy-btn')) {
-    new RankPurchaseHandler();
-  }
+  // Initialize rank purchase handler (uses event delegation, so always initialize)
+  console.log('Initializing RankPurchaseHandler...');
+  new RankPurchaseHandler();
   
   // Update wallet display if user is logged in
   if (window.updateWalletDisplay) {
@@ -452,4 +799,120 @@ document.addEventListener('DOMContentLoaded', function() {
   if (document.querySelector('.item-buy-btn')) {
     new ItemPurchaseHandler();
   }
+});
+
+// Popup Handler for Perks and Requirements
+class PopupHandler {
+  constructor() {
+    this.init();
+  }
+  
+  init() {
+    // Handle Perks buttons
+    document.querySelectorAll('.perks-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const rankName = btn.getAttribute('data-rank');
+        const perksData = btn.getAttribute('data-perks');
+        const perks = perksData ? JSON.parse(perksData) : [];
+        this.showPerksPopup(rankName, perks);
+      });
+    });
+    
+    // Handle Requirements buttons
+    document.querySelectorAll('.requirements-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const rankName = btn.getAttribute('data-rank');
+        const requirementsData = btn.getAttribute('data-requirements');
+        const requirements = requirementsData ? JSON.parse(requirementsData) : [];
+        this.showRequirementsPopup(rankName, requirements);
+      });
+    });
+  }
+  
+  showPerksPopup(rankName, perks) {
+    // Create popup
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    
+    const popup = document.createElement('div');
+    popup.className = 'popup-content';
+    
+    popup.innerHTML = `
+      <div class="popup-header">
+        <h3>${rankName} Rank - Perks</h3>
+        <button class="popup-close">&times;</button>
+      </div>
+      <div class="popup-body">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+          ${perks.map(perk => `
+            <div style="padding: 12px; background: rgba(118, 199, 255, 0.1); border: 1px solid rgba(118, 199, 255, 0.3); border-radius: 12px; text-align: center; color: #76c7ff; font-weight: 600; font-size: 13px;">
+              ${perk}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    
+    // Close handlers
+    const closeBtn = popup.querySelector('.popup-close');
+    closeBtn.addEventListener('click', () => {
+      document.body.removeChild(overlay);
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        document.body.removeChild(overlay);
+      }
+    });
+  }
+  
+  showRequirementsPopup(rankName, requirements) {
+    // Create popup
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay';
+    
+    const popup = document.createElement('div');
+    popup.className = 'popup-content';
+    
+    popup.innerHTML = `
+      <div class="popup-header">
+        <h3>${rankName} Rank - Requirements</h3>
+        <button class="popup-close">&times;</button>
+      </div>
+      <div class="popup-body">
+        <div style="display: flex; flex-direction: column; gap: 15px;">
+          ${requirements.map((req, index) => `
+            <div style="padding: 15px; background: rgba(118, 199, 255, 0.08); border-left: 3px solid #76c7ff; border-radius: 8px; color: var(--text); line-height: 1.6;">
+              <strong style="color: #76c7ff;">${index + 1}.</strong> ${req}
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+    
+    // Close handlers
+    const closeBtn = popup.querySelector('.popup-close');
+    closeBtn.addEventListener('click', () => {
+      document.body.removeChild(overlay);
+    });
+    
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        document.body.removeChild(overlay);
+      }
+    });
+  }
+}
+
+// Initialize popup handler when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  new PopupHandler();
 });
