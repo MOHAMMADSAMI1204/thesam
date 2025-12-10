@@ -2,16 +2,49 @@
 
 /* Event Hero Card - Centered Water Card */
 .event-hero-card {
+  position: relative;
   text-align: center;
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
   padding: 40px 30px;
-  border-radius: 32px;
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(14px) saturate(130%);
-  box-shadow: var(--shadow);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.95), rgba(11, 18, 32, 0.98));
+  border: 2px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(118, 199, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.event-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.05), rgba(74, 167, 239, 0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.event-hero-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(118, 199, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(118, 199, 255, 0.4);
+}
+
+.event-hero-card:hover::before {
+  opacity: 1;
 }
 
 .event-hero-card h1 {
@@ -70,16 +103,48 @@
 }
 
 .smp .card {
+  position: relative;
   text-align: center;
   max-width: 900px;
   margin: 20px auto;
   padding: 40px 30px;
-  border-radius: 32px;
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(14px) saturate(130%);
-  box-shadow: var(--shadow);
-  
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.95), rgba(11, 18, 32, 0.98));
+  border: 2px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(118, 199, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.smp .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.05), rgba(74, 167, 239, 0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.smp .card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(118, 199, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(118, 199, 255, 0.4);
+}
+
+.smp .card:hover::before {
+  opacity: 1;
 }
 
 .smp .card h1 {
@@ -820,16 +885,49 @@
 
 /* Event Hero Card - Centered Water Card */
 .event-hero-card {
+  position: relative;
   text-align: center;
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
   padding: 40px 30px;
-  border-radius: 32px;
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(14px) saturate(130%);
-  box-shadow: var(--shadow);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.95), rgba(11, 18, 32, 0.98));
+  border: 2px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(118, 199, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.event-hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.05), rgba(74, 167, 239, 0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.event-hero-card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(118, 199, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(118, 199, 255, 0.4);
+}
+
+.event-hero-card:hover::before {
+  opacity: 1;
 }
 
 .event-hero-card h1 {
@@ -888,16 +986,48 @@
 }
 
 .smp .card {
+  position: relative;
   text-align: center;
   max-width: 900px;
   margin: 20px auto;
   padding: 40px 30px;
-  border-radius: 32px;
-  background: var(--card-bg);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(14px) saturate(130%);
-  box-shadow: var(--shadow);
-  
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(15, 27, 51, 0.95), rgba(11, 18, 32, 0.98));
+  border: 2px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(118, 199, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.smp .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(118, 199, 255, 0.05), rgba(74, 167, 239, 0.03));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.smp .card:hover {
+  transform: translateY(-15px) scale(1.03);
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.6),
+    0 0 30px rgba(118, 199, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: rgba(118, 199, 255, 0.4);
+}
+
+.smp .card:hover::before {
+  opacity: 1;
 }
 
 .smp .card h1 {

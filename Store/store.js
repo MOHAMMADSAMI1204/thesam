@@ -209,6 +209,9 @@ class RankPurchaseHandler {
     overlay.style.zIndex = '10000'; // Ensure it's on top
     overlay.style.display = 'flex'; // Ensure it's displayed
     
+    // Check if this is a pack button (currency section)
+    const isPackButton = button.classList.contains('Pack-buy-btn');
+    
     // Create popup content
     const popup = document.createElement('div');
     popup.className = 'popup-content';
@@ -263,7 +266,39 @@ class RankPurchaseHandler {
               placeholder="Enter your Discord username (e.g., username#1234)"
             >
           </div>
+          ${isPackButton ? `
+          <div class="form-group">
+            <label for="youtube-username" class="form-label">
+              YouTube Livechat Username
+              <span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="youtube-username" 
+              name="youtube-username" 
+              class="form-input" 
+              placeholder="Enter your YouTube livechat username"
+              required
+            >
+          </div>
           
+          <div class="form-group">
+            <label for="current-ts-coins" class="form-label">
+              Current TS Coins
+              <span class="required">*</span>
+            </label>
+            <input 
+              type="number" 
+              id="current-ts-coins" 
+              name="current-ts-coins" 
+              class="form-input" 
+              placeholder="Enter your current TS Coins"
+              required
+              min="0"
+              step="1"
+            >
+          </div>
+          ` : ''}
           <div class="form-group">
             <label for="image-upload" class="form-label">
               Upload Image
@@ -342,8 +377,7 @@ class RankPurchaseHandler {
     
     // Form submission handler
     const form = popup.querySelector('#Rank-form');
-    // Store button class to determine webhook
-    const isPackButton = button.classList.contains('Pack-buy-btn');
+    // Store button class to determine webhook (already defined above)
     // Get TS Coins value if available
     const tsCoins = button.getAttribute('data-ts-coins');
     form.addEventListener('submit', (e) => {
@@ -357,7 +391,12 @@ class RankPurchaseHandler {
     const minecraftEdition = formData.get('minecraft-edition');
     const minecraftUsername = formData.get('minecraft-username');
     const discordUsername = formData.get('discord-username');
+    const youtubeUsername = isPackButton ? formData.get('youtube-username') : null;
+    const currentTsCoinsInput = isPackButton ? formData.get('current-ts-coins') : null;
     const imageFile = formData.get('image-upload');
+    
+    // Get current TS coins from input field (only for pack buttons)
+    const currentTsCoins = isPackButton && currentTsCoinsInput ? parseInt(currentTsCoinsInput) : null;
     
     // Validate required fields
     if (!minecraftEdition || minecraftEdition.trim() === '') {
@@ -368,6 +407,19 @@ class RankPurchaseHandler {
     if (!minecraftUsername || minecraftUsername.trim() === '') {
       this.showFormMessage('Please enter your Minecraft username', 'error');
       return;
+    }
+    
+    // Validate pack-specific required fields
+    if (isPackButton) {
+      if (!youtubeUsername || youtubeUsername.trim() === '') {
+        this.showFormMessage('Please enter your YouTube Livechat Username', 'error');
+        return;
+      }
+      
+      if (!currentTsCoinsInput || currentTsCoinsInput.trim() === '' || isNaN(currentTsCoins) || currentTsCoins < 0) {
+        this.showFormMessage('Please enter a valid Current TS Coins amount', 'error');
+        return;
+      }
     }
     
     if (!imageFile || imageFile.size === 0) {
@@ -394,6 +446,8 @@ class RankPurchaseHandler {
         minecraftEdition: minecraftEdition,
         minecraftUsername: minecraftUsername,
         discordUsername: discordUsername,
+        youtubeUsername: youtubeUsername,
+        currentTsCoins: currentTsCoins,
         imageFile: imageFile
       }, null, webhookUrl, tsCoins);
       
@@ -403,6 +457,8 @@ class RankPurchaseHandler {
         minecraftEdition: minecraftEdition,
         minecraftUsername: minecraftUsername,
         discordUsername: discordUsername,
+        youtubeUsername: youtubeUsername,
+        currentTsCoins: currentTsCoins,
         imageFile: imageFile
       });
       
@@ -492,13 +548,32 @@ class RankPurchaseHandler {
         name: '💬 Discord Username',
         value: formData.discordUsername || 'Not provided',
         inline: false
-      },
-      {
-        name: '🕐 Submitted At',
-        value: submittedAt,
-        inline: false
       }
     );
+    
+    // Add YouTube username and current TS coins only if provided (for pack buttons)
+    if (formData.youtubeUsername !== undefined) {
+      embed.fields.push({
+        name: '📺 YouTube Livechat Username',
+        value: formData.youtubeUsername || 'Not provided',
+        inline: false
+      });
+    }
+    
+    if (formData.currentTsCoins !== undefined && formData.currentTsCoins !== null) {
+      embed.fields.push({
+        name: '🪙 Current TS Coins',
+        value: `${formData.currentTsCoins.toLocaleString('en-IN')} TS Coins`,
+        inline: false
+      });
+    }
+    
+    // Add submitted at timestamp
+    embed.fields.push({
+      name: '🕐 Submitted At',
+      value: submittedAt,
+      inline: false
+    });
     
     // Add image to embed if file is available
     if (formData.imageFile && formData.imageFile.size > 0) {
