@@ -1123,7 +1123,16 @@ body {
 footer { 
   margin:60px 0 40px; 
   text-align:center; 
-  color: var(--muted); 
+  color: var(--muted);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+footer p {
+  margin: 0;
+  text-align: center;
 }
 
 /* Responsiveness */
